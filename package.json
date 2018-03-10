@@ -1,0 +1,23 @@
+{
+  "name": "tstestbed.git",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raptoravis/tstestbed.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raptoravis/tstestbed/issues"
+  },
+  "homepage": "https://github.com/raptoravis/tstestbed#readme",
+  "devDependencies": {
+    "typescript": "^2.7.2"
+  }
+}

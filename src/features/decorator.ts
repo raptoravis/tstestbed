@@ -1,10 +1,10 @@
 function logClass(target: any) {
   // save a reference to the original constructor
-  var original = target;
+  const original = target;
 
   // a utility function to generate instances of a class
   function construct(constructor: any, ...args: any[]) {
-    var c: any = function() {
+    const c: any = function() {
       return constructor.apply(this, args);
     };
     c.prototype = constructor.prototype;
@@ -12,8 +12,8 @@ function logClass(target: any) {
   }
 
   // the new constructor behaviour
-  var f: any = function(...args: any[]) {
-    console.log("New: " + original.name);
+  const f: any = (...args: any[]) => {
+    console.log('New: ' + original.name);
     return construct(original, args);
   };
 
@@ -25,7 +25,7 @@ function logClass(target: any) {
 }
 
 function logParameter(target: any, key: string, index: number) {
-  var metadataKey = `__log_${key}_parameters`;
+  const metadataKey = `__log_${key}_parameters`;
   if (Array.isArray(target[metadataKey])) {
     target[metadataKey].push(index);
   } else {
@@ -37,28 +37,28 @@ function logMethod(target: any, key: string, descriptor: any) {
   if (descriptor === undefined) {
     descriptor = Object.getOwnPropertyDescriptor(target, key);
   }
-  var originalMethod = descriptor.value;
+  const originalMethod = descriptor.value;
 
-  //editing the descriptor/value parameter
+  // editing the descriptor/value parameter
   descriptor.value = function(...args: any[]) {
-    var metadataKey = `__log_${key}_parameters`;
-    var indices = target[metadataKey];
+    const metadataKey = `__log_${key}_parameters`;
+    const indices = target[metadataKey];
 
     if (Array.isArray(indices)) {
-      for (var i = 0; i < args.length; i++) {
+      for (let i = 0; i < args.length; i++) {
         if (indices.indexOf(i) !== -1) {
-          var arg = args[i];
-          var argStr = JSON.stringify(arg) || arg.toString();
+          const arg = args[i];
+          const argStr = JSON.stringify(arg) || arg.toString();
           console.log(`${key} arg[${i}]: ${argStr}`);
         }
       }
-      var result = originalMethod.apply(this, args);
+      const result = originalMethod.apply(this, args);
       return result;
     } else {
-      var a = args.map(a => JSON.stringify(a) || a.toString()).join();
-      var result = originalMethod.apply(this, args);
-      var r = JSON.stringify(result);
-      console.log(`Call: ${key}(${a}) => ${r}`);
+      const b = args.map(a => JSON.stringify(a) || a.toString()).join();
+      const result = originalMethod.apply(this, args);
+      const r = JSON.stringify(result);
+      console.log(`Call: ${key}(${b}) => ${r}`);
       return result;
     }
   };
@@ -69,16 +69,16 @@ function logMethod(target: any, key: string, descriptor: any) {
 
 function logProperty(target: any, key: string) {
   // property value
-  var _val = this[key];
+  let _val = this[key];
 
   // property getter
-  var getter = function() {
+  const getter = () => {
     console.log(`Get: ${key} => ${_val}`);
     return _val;
   };
 
   // property setter
-  var setter = function(newVal: any) {
+  const setter = (newVal: any) => {
     console.log(`Set: ${key} => ${newVal}`);
     _val = newVal;
   };
@@ -95,8 +95,8 @@ function logProperty(target: any, key: string) {
   }
 }
 
-function logClassWithArgs(filter: Object) {
-  return (target: Object) => {
+function logClassWithArgs(filter: any) {
+  return (target: any) => {
     // implement class decorator here, the class decorator
     // will have access to the decorator arguments (filter)
     // because they are  stored in a closure
@@ -110,7 +110,7 @@ function logFactory(...args: any[]) {
     case 2:
       return logProperty.apply(this, args);
     case 3:
-      if (typeof args[2] === "number") {
+      if (typeof args[2] === 'number') {
         return logParameter.apply(this, args);
       }
       return logMethod.apply(this, args);
@@ -130,21 +130,10 @@ class Person {
   }
 
   @logMethod
-  public saySomething(
-    @logParameter something: string,
-    somethingElse: string
-  ): string {
-    return (
-      this.name +
-      " " +
-      this.surname +
-      " says: " +
-      something +
-      " " +
-      somethingElse
-    );
+  public saySomething(@logParameter something: string, somethingElse: string): string {
+    return this.name + ' ' + this.surname + ' says: ' + something + ' ' + somethingElse;
   }
 }
 
-var p = new Person("remo", "jansen");
-p.saySomething("I love playing", "halo");
+let p = new Person('remo', 'jansen');
+p.saySomething('I love playing', 'halo');

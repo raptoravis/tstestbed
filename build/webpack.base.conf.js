@@ -25,7 +25,9 @@ module.exports = {
     extensions: ['.ts', '.js', '.vue', '.json'],
     alias: {
       vue$: 'vue/dist/vue.esm.js',
-      '@': resolve('src')
+      '@': resolve('src'),
+      babylonjs: '@tencent/babylonjs',
+      'babylonjs-gui': '@tencent/babylonjs-gui'
     }
   },
   module: {

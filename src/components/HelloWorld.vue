@@ -9,7 +9,7 @@ export default {
   name: 'HelloWorld',
   data() {
     return {
-      msg: 'Welcome to TS Test Bed App'
+      msg: 'Welcome to Testbed App'
     };
   }
 };

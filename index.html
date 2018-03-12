@@ -17,20 +17,28 @@
     <script src="https://preview.babylonjs.com/oimo.js"></script>
     -->
 
-  <!-- <style>
-    #nutCanvas {
-      width: 100%;
+  <style>
+    html,
+    body {
       height: 100%;
-    } -->
+      overflow-y: hidden;
+    }
+
+    #app {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
 
   </style>
 </head>
 
 <body>
-  <div id="app"></div>
+  <div id="app">
+    <canvas id="nutCanvas"></canvas>
+  </div>
   <!-- built files will be auto injected -->
-
-  <!-- <canvas id="nutCanvas"></canvas> -->
 </body>
 
 </html>

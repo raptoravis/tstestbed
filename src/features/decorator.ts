@@ -121,7 +121,7 @@ function logFactory(...args: any[]) {
 
 @logClass
 class Person {
-  @logProperty public name: string;
+  /*@logProperty*/ public name: string;
   public surname: string;
 
   constructor(name: string, surname: string) {

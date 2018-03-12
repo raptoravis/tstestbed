@@ -3,11 +3,25 @@
     "lib": ["dom", "es5", "es2015"],
     "target": "es5",
     "module": "es2015",
+    "experimentalDecorators": true,
     "moduleResolution": "node",
     "sourceMap": true,
-    // "strict": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true
+
+    "strict": true,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    // "alwaysStrict": true,
+    // "strictNullChecks": true,
+    // "strictFunctionTypes": true,
+    // "strictPropertyInitialization": true,
+
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "babylonjs": ["./node_modules/@tencent/babylonjs"],
+      "babylonjs-gui": ["./node_modules/@tencent/babylonjs-gui"],
+      "babylonjs-materials": ["./node_modules/@tencent/babylonjs-materials"]
+    }
   },
-  "include": ["./src/**/*"]
+  "include": ["./src/", "./build/misc/vue-shims.d.ts"]
 }
